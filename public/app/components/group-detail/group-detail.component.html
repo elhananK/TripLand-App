@@ -1,0 +1,74 @@
+<div class="container">
+  <div *ngIf="group">
+
+    <div style="margin-bottom: 1cm;">
+    <li class="button" style="margin-left: 17px" (click)="goBack()">Back</li>
+    <li style="font-size: 50px; font-family: 'Century Gothic'; color: #999999; display: inline; margin-left: 11cm; margin-top: 13px; list-style-type: none;"> {{group.title}}</li>
+    </div>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+
+    <div class="container">
+      <form id="filter" >
+        <input class="posttitlel" type="text" placeholder="Search Post.." [ngModelOptions] = "{standalone:true}" [(ngModel)]="term" name="term" />
+      </form>
+      <div class="well" *ngFor="let post of posts | filter:term">
+        <div class="media" >
+          <a class="pull-left" href="#">
+            <img class="media-object"  width="150" height="150" src="{{post.image}}">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading posttitle" style="font-family: Arial" (click)="gotoPostDetail(post)" >{{post.title}}</h4>
+            <!--<p class="text-right">{{post.userId}}</p>-->
+            <p style="font-family: AppleGothic ">{{post.text}}</p>
+            <a *ngIf="post.linkUrl != ' ' " href="{{post.linkUrl}}"><i class="fa fa fa-link"></i> See Link </a>
+            <ul class="list-inline list-unstyled">
+              <li>|</li>
+              <span class="button1" (click)="gotoPostDetail(post)"><i class="glyphicon glyphicon-comment customComment"  ></i> Comment </span>
+              <li>|</li>
+              <span class="button1" *ngIf="post.likes != 0" (click)="Like(post._id)"><i *ngIf="post.likes != 0" class="glyphicon glyphicon-thumbs-up custom" ></i> Like {{post.likes}}</span>
+              <span class="button1" *ngIf="post.likes == 0" (click)="Like(post._id)"><i class="glyphicon glyphicon-thumbs-up " ></i> Like {{post.likes}}</span>
+              <li>|</li>
+              <span class="button1" *ngIf="post.dislikes != 0" (click)="Dislike(post._id)"><i *ngIf="post.dislikes != 0" class="glyphicon glyphicon-thumbs-down customMinus " ></i> Dislike {{post.dislikes}}</span>
+              <span class="button1" *ngIf="post.dislikes == 0" (click)="Dislike(post._id)"><i  class="glyphicon glyphicon-thumbs-down " ></i> Dislike {{post.dislikes}}</span>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="./group-detail.component.css">
+    <div class="container" style="margin-left: 15px; margin-top: 45px">
+      <div class="row">
+
+        <div class="row" >
+
+          <div class="col-md-6" >
+            <div>
+              <div class="status-upload">
+                <form>
+                    <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" />
+                  <input class="form-control" placeholder="Post Title" #postTitle>
+                  <input class="form-control" placeholder="Copy Link Url" #postUrl/>
+                  <textarea placeholder="Where Did You Travel?" #postText></textarea>
+                  <button type="button" class="btn btn-success btn-xs"
+                          (click)="uploader.uploadAll()">
+                    <span class="glyphicon glyphicon-upload"></span> Upload
+                  </button>
+                  <label style="margin-top: 10px; margin-left: 5px"> Logged-In Users Only:
+                    <input type="checkbox" [checked]="checkBoxValue" (change)="checkBoxValue = !checkBoxValue" />
+                  </label>
+                  <button (click)="add(postText.value,postTitle.value,postUrl.value); postText.value = ''" type="submit" class="btn btn-success green"><i class="fa fa-share"></i>POST</button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+
+

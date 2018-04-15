@@ -1,0 +1,123 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+
+<!--<head>-->
+
+  <!--<title>Blog Post - Start Bootstrap Template</title>-->
+
+  <!--&lt;!&ndash; Bootstrap Core CSS &ndash;&gt;-->
+  <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+
+  <!--&lt;!&ndash; Custom CSS &ndash;&gt;-->
+  <!--<link href="css/blog-post.css" rel="stylesheet">-->
+
+<!--</head>-->
+
+
+<!-- Page Content -->
+<div class="container" >
+    <button class="button" style="margin-bottom: 13px" (click)="goBack()">Back</button>
+
+    <div class="row">
+
+    <!-- Blog Post Content Column -->
+    <div class="col-lg-8">
+
+
+        <div *ngIf="post && post.userId" class="media-body" >
+
+        <!--<img class="media-object" src="{{post.userId.image}}" height="64" width="64" alt="">-->
+            <h4 class="media-heading">
+                <small>Story by {{post.userId.firstName}} {{post.userId.lastName}}</small>
+            </h4>
+        </div>
+
+        <!-- Blog Post -->
+
+      <!-- Title -->
+      <h1 *ngIf="post">{{post.title}}</h1>
+
+      <hr>
+      <div *ngIf="post">
+
+      <!-- Date/Time -->
+      <p><span class="glyphicon glyphicon-time"></span> Posted on {{post.dateCreated}}</p>
+</div>
+      <hr>
+<div *ngIf="post">
+
+      <!-- Preview Image -->
+      <img class="img-responsive" src="{{post.image}}" alt="">
+
+      <hr>
+      <!-- Post Content -->
+      <p class="lead">{{post.text}}</p>
+    <a *ngIf="post.linkUrl != ' ' " href="{{post.linkUrl}}"><i class="fa fa fa-link"></i> See Link </a>
+
+</div>
+      <hr>
+
+      <!-- Blog Comments -->
+
+      <!-- Comments Form -->
+        <div *ngIf="post && post.connectedUserFlag == false">
+      <div class="well" >
+        <h4>Leave a Comment:</h4>
+        <form role="form">
+          <div class="form-group">
+            <textarea class="form-control" rows="3" #commentText></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="addComment(commentText.value); commentText.value = ''" >Submit</button>
+        </form>
+      </div>
+        </div>
+
+
+      <hr>
+
+      <!-- Posted Comments -->
+
+      <!-- Comment -->
+      <div *ngIf="comments">
+        <div class="media" *ngFor="let comment of comments" >
+        <a class="pull-left" >
+          <img class="media-object" style="margin: auto" src="{{comment.ownerImage}}" height="64" width="64" alt="">
+        </a>
+        <div class="media-body" >
+            <h4 class="media-heading">
+                <small>{{comment.ownerFN}} {{comment.ownerLN}}</small>
+            </h4>
+            <p style="color: black"> {{comment.text}}</p>
+          <h4 class="media-heading">
+            <small *ngIf="comment.date"> {{comment.date |  date:"dd' in 'MMM' at 'H:mm"}}</small>
+          </h4>
+        </div>
+        </div>
+      </div>
+
+      <!-- Comment -->
+
+    </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Copyright &copy; TripLand App 2017</p>
+      </div>
+    </div>
+    <!-- /.row -->
+  </footer>
+
+</div>
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+
+<!--</html>-->

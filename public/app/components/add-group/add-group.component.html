@@ -1,0 +1,38 @@
+<html>
+
+  <title>Sign Up Form</title>
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+<body>
+<form action="index.html" method="post">
+
+  <div class="button1">
+  <agm-map  [latitude]="lat" [longitude]="lng"
+           (mapClick)="mapClicked($event)">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+  </div>
+
+  <div>
+  <h1 style="margin-top: 30px">Add New Area</h1>
+  <img *ngIf="country_shortName" class="img-responsive button1" style="margin-left: 5cm; margin-bottom: 5px"   height="64" width="64" src="http://www.geonames.org/flags/x/{{country_shortName}}.gif" alt="">
+  </div>
+  <fieldset>
+    <legend><span class="number">1</span>Your Group Info</legend>
+    <label for="name">Group Name:</label>
+    <input type="text" name="groupName" id="name" placeholder="{{country_longName}}" [(ngModel)]="country_longName" (focusout)="findLatLngByCountryName()" #title>
+  <div class="form-group">
+    <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" />
+  </div>
+    <button type="button" class="btn btn-success btn-xs"
+            (click)="uploader.uploadAll()">
+      <span class="glyphicon glyphicon-upload"></span> Upload
+    </button>
+  <button (click)="AddGroup(title.value)">Add Group</button>
+  </fieldset>
+</form>
+
+</body>
+</html>

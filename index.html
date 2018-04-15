@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <base href="/">
+    <title>Tripland</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="public/app/shared/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="public/app/components/navbar/navbar.component.css">
+
+    <!--&lt;!&ndash;APIs&ndash;&gt;-->
+    <!--&lt;!&ndash;Google Maps Javascript API&ndash;&gt;-->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB931vv4bgbiR3MeFMdzOIMC_RG01rCWjM"></script>-->
+
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <!-- Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+
+    <!-- Socket.io for Client -->
+    <script src="node_modules/socket.io-client/socket.io.js"></script>
+
+    <script>
+      System.import('app').catch(function(err){ console.error(err);
+      });
+    </script>
+</head>
+
+<body>
+    <my-app>Loading App...</my-app>
+</body>
+
+</html>

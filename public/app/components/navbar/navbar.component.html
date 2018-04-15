@@ -1,0 +1,86 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
+
+<div class="container">
+    <div class="row">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" routerLink="/">{{branding}}</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a routerLink="/"> Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li>
+                            <a *ngIf="curUser"routerLink="/groups"> Areas</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" *ngIf="curUser" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> More... <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a routerLink="/profile">Profile</a></li>
+                                <!--<li><a href="#">Another action</a></li>-->
+                                <!--<li><a href="#">Something else here</a></li>-->
+                                <!--<li role="separator" class="divider"></li>-->
+                                <!--<li><a href="#">Separated link</a></li>-->
+                                <!--<li role="separator" class="divider"></li>-->
+                                <!--<li><a href="#">One more separated link</a></li>-->
+                            </ul>
+                        </li>
+                    </ul>
+                    <div *ngIf="curUser" style="position: absolute; right: 145px;   margin-top: 13px; ">
+                        <li style="font-size: 15px; color: #00B7FF;display: inline; list-style-type: none;">Hello, {{curUser.firstName}}</li>
+                        <li style="display: inline; list-style-type: none;margin-left: 10px;">
+                            <a style=" color: #999999;" *ngIf="curUser" (click)="logout()">logout</a>
+                        </li>
+                    </div>
+                    <ul  *ngIf="curUser" class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notification (<b *ngIf="notifyArray" style="color: red">{{notifyArray.length}}</b>)</a>
+                            <ul  class="dropdown-menu notify-drop">
+                                <div class="notify-drop-title">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">Last Notifications: (<b *ngIf="notifyArray" style="color: red" >{{notifyArray.length}}</b>)</div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="tümü okundu."><i class="fa fa-dot-circle-o"></i></a></div>
+                                    </div>
+                                </div>
+                                <!-- end notify title -->
+                                <!-- notify content -->
+                                <div class="drop-content">
+                                    <li *ngFor="let notify of notifyArray">
+                                        <div class=" col-sm-3 col-xs-3"><div class="notify-img"><img src="{{notify.image}}"  height="45" width="45" ></div></div>
+                                        <div  class="col-md-9 col-sm-9 col-xs-9 pd-l0"><h6>{{notify.text}}</h6><button class="button1" *ngIf="notify.button == 'Approve'" style="margin-left: 70px; margin-bottom: 5px" (click)="notifyApprove(notify)">Approve</button>
+                                            <button class="button1" *ngIf="notify.button == 'Go To Post'" style="margin-left: 70px; margin-bottom: 5px" (click)="GoToPost(notify)">Go To Post</button>
+                                            <button class="button1"  *ngIf="notify.button == 'OK'" style="margin-left: 70px; margin-bottom: 5px" (click)="groupOk(notify)">OK</button>
+
+
+                                        </div>
+                                    </li>
+                                </div>
+                                <div class="notify-drop-footer text-center">
+                                    <a href=""><i class="fa fa-eye"></i> See All Notification</a>
+                                </div>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+    <!--<groups [groups]="groups"></groups>-->
+</div>
+
+<script>
+    $(function () {
+        $('[data-tooltip="tooltip"]').tooltip()
+    });
+</script>

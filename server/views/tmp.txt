@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+  </body>
+</html>
+
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
+
+
+var packages = {
+  'app': { main: 'main.js',  defaultExtension: 'js' },
+  'rxjs': { defaultExtension: 'js' },
+  'angular2-in-memory-web-api': { defaultExtension: 'js' },
+};
+
+var packageNames = [
+  '@angular/common',
+  '@angular/compiler',
+  '@angular/core', // <--------
+  '@angular/http',
+  '@angular/platform-browser',
+  '@angular/platform-browser-dynamic',
+  '@angular/router',
+  '@angular/router-deprecated',
+  '@angular/testing',
+  '@angular/upgrade',
+];
+
+packageNames.forEach(function(pkgName) {
+  packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
+});
+
+var config = {
+  map: map,
+  packages: packages
+}
+
+System.config(config);
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tripland</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
+  <script src="https://code.angularjs.org/2.0.0-beta.6/angular2-polyfills.js"></script>
+  <script src="https://code.angularjs.org/tools/system.js"></script>
+  <script src="https://code.angularjs.org/tools/typescript.js"></script>
+  <script src="https://code.angularjs.org/2.0.0-beta.6/Rx.js"></script>
+  <script src="https://code.angularjs.org/2.0.0-beta.6/angular2.dev.js"></script>
+  <script>
+    System.config({
+      transpiler: 'typescript',
+      typescriptOptions: { emitDecoratorMetadata: true },
+      packages: {'app': {defaultExtension: 'ts'}},
+      map: { 'app': './src/app' }
+    });
+
+    System.import('app/project_final_main')
+            .then(null, console.error.bind(console));
+  </script>
+
+</head>
+<body>
+<my-app>Loading...</my-app>
+<!--<router-outlet></router-outlet>-->
+</body>
+</html>

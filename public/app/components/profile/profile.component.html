@@ -1,0 +1,51 @@
+
+<link rel="stylesheet" href="profile.component.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<div class="container" *ngIf="curUser" style="margin-top: 20px; margin-bottom: 20px;">
+    <div class="row panel">
+        <div class="col-md-4 bg_blur ">
+        </div>
+        <div class="col-md-8  col-xs-12">
+            <img src="{{curUser.image}}" class="img-thumbnail picture hidden-xs" />
+            <img src="{{curUser.image}}" class="img-thumbnail visible-xs picture_mob" />
+            <div class="header">
+                <h1>{{curUser.firstName + " " + curUser.lastName}}</h1>
+                <h4>Web Developer</h4>
+                <div class="fa fa-envelope-o" > <i style=" font-size: 15px; font-family: Verdana, Geneva, sans-serif;" >{{curUser.email}}</i> </div>
+                <div style="margin-top: 12px">
+                    <span>Hi! My name is Elhanan Kalfa. I’m 26 and I live in Warsaw which is the capital of Poland. Actually I come from another city - Wroclaw, where I lived for eleven years, but five years ago, my dad decided to change his job, and we all moved to Warsaw. I have a sister – Maja. She is 18 and she had been to USA two years ago and now she studies law at the University of Warsaw. My dad works for a German company. My mom used to teatch at the University and now, she works as a computer analitist.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row nav" *ngIf="likesCounter">
+        <div class="col-md-4"></div>
+        <div class="col-md-8 col-xs-12" style="margin: 0px;padding: 0px;">
+            <div class="col-md-4 col-xs-4 well"><i class="fa fa-weixin  fa-lg"></i>{{ " " + likesCounter.comments}}</div>
+            <div class="col-md-4 col-xs-4 well"><i class="fa fa-thumbs-o-down  fa-lg"></i> {{likesCounter.disLikes}}</div>
+            <div class="col-md-4 col-xs-4 well"><i class="fa fa-thumbs-o-up fa-lg"></i>{{" " + likesCounter.likes}}</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <form id="filter" >
+        <input class="posttitlel" type="text" placeholder="Search Post.." [ngModelOptions] = "{standalone:true}" [(ngModel)]="term" name="term" />
+    </form>
+    <div class="wellpost" style="margin-top: 0.5cm; background-color: white;color: black; text-align: left" *ngFor="let post of posts | filter:term">
+        <div class="media" >
+            <a class="pull-left" href="#">
+                <img class="media-object"  width="150" height="150" src="{{post.image}}">
+            </a>
+            <div class="media-body">
+                <h2 class="media-heading posttitle" style="margin-top: 50px" (click)="gotoPostDetail(post)" >{{post.title}}</h2>
+                <!--<p class="text-right">{{post.userId}}</p>-->
+                <h4 style="font-family: AppleGothic ">{{post.text}}</h4>
+            </div>
+        </div>
+    </div>
+</div>
